@@ -56,8 +56,8 @@ renderSomethingOnThePage(
  * will draw something to the page using the template defined in that function:
  */
 
-// renderSomethingOnThePage('Each additional message you give this function...');
-// renderSomethingOnThePage('...will draw a new message on the page!');
+renderSomethingOnThePage('Each additional message you give this function...');
+renderSomethingOnThePage('...will draw a new message on the page!');
 
 /* Let's revisit what we have learned from the last exercise.
  * We are working with a different application this time - we are going to be
@@ -94,6 +94,7 @@ var Message = Backbone.Model.extend({
    * [the documentation](http://backbonejs.org/#Model-constructor).
    */
   initialize: function(){
+    console.log('new Message created');
     /* This code will be run when we instantiate a new message.
      *
      * Notice that we are calling `this.on()`.
@@ -101,7 +102,10 @@ var Message = Backbone.Model.extend({
      * Putting it into the initialize function let's us be sure that
      * all models that are created will have event listeners on them.
      */
-    this.on(YOUR CODE HERE);
+    this.on('change:message', function() {
+    
+        renderSomethingOnThePage(this.get('message'));
+    }, this);
     /* It is your turn to write the event handler.
      *
      * Make an event listener that will listen for a `change` in this model's
